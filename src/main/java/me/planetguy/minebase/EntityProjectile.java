@@ -8,9 +8,12 @@ public class EntityProjectile extends Entity{
 
 	private String network;
 	
-	public EntityProjectile(World par1World, String network) {
+	private final ProjectileType projectileType;
+	
+	public EntityProjectile(World par1World, String network, ProjectileType type) {
 		super(par1World);
 		this.network=network;
+		this.projectileType=type;
 	}
 
 	@Override
