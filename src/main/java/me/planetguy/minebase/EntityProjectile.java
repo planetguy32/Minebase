@@ -17,6 +17,7 @@ public class EntityProjectile extends Entity{
 		super(par1World);
 		this.network=network;
 		this.projectileType=type;
+		this.setSize(0.5F, 0.5F);
 	}
 
 	@Override
@@ -45,7 +46,9 @@ public class EntityProjectile extends Entity{
 	}
 
 	public void onUpdate(){
-		System.out.println("asdfoijafdjk");
+		moveEntity(motionX, motionY, motionZ);
+		motionY-=0.4903325;//=gravity/20
+		System.out.println(this);
 		Block block = this.worldObj.getBlock((int)posX, (int)posY,(int)posZ);
 
 		if (block.getMaterial() != Material.air)
@@ -60,6 +63,7 @@ public class EntityProjectile extends Entity{
 	}
 
 	public void onLand(){
+		System.out.println("Projectile of type "+this.projectileType+" landed");
 		switch(this.projectileType){
 		case ANTI_AIR:
 			
@@ -102,6 +106,7 @@ public class EntityProjectile extends Entity{
 			break;
 		
 		}
+		this.setDead();
 	}
 
 }
