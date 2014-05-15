@@ -46,8 +46,8 @@ public class EntityProjectile extends Entity{
 	}
 
 	public void onUpdate(){
-		moveEntity(motionX, motionY, motionZ);
-		motionY-=0.4903325;//=gravity/20
+		//moveEntity(motionX, motionY, motionZ);
+		//motionY-=0.4903325;//=gravity/20
 		System.out.println(this);
 		Block block = this.worldObj.getBlock((int)posX, (int)posY,(int)posZ);
 
