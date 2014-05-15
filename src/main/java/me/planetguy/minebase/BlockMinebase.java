@@ -14,12 +14,15 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 	
 	protected BlockMinebase() {
 		super(Material.iron);
+		this.setCreativeTab(Minebase.creativeTab);
 	}
 	
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer player, int side, float i, float d, float k){
 		switch(w.getBlockMetadata(x, y, z)){
 		case META_LAUNCHER:
-			
+			double dx=player.posX-x+0.5;
+			double dz=player.posZ-z+0.5;
+			System.out.println("("+dx+"\n   "+dz);
 			return true;
 			
 		case META_ASSEMBLER:
