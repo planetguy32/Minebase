@@ -10,6 +10,8 @@ public class TileEntityMinebase extends TileEntity{
 	
 	private String nodeID;
 	
+	private ProjectileType storedProjectileType;
+	
 	private String owner;
 	
 	public TileEntityMinebase(){
@@ -37,12 +39,20 @@ public class TileEntityMinebase extends TileEntity{
 		this.nodeID = containingNetwork;
 	}
 
-	private String getOwner() {
+	public String getOwner() {
 		return owner;
 	}
 
 	private void setOwner(String owner) {
 		this.owner = owner;
+	}
+
+	public ProjectileType getStoredProjectileType() {
+		return storedProjectileType;
+	}
+
+	public void setStoredProjectileType(ProjectileType storedProjectileType) {
+		this.storedProjectileType = storedProjectileType;
 	}
 
 }
