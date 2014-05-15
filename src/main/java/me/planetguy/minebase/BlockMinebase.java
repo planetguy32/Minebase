@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -11,7 +12,7 @@ import net.minecraft.world.World;
 public class BlockMinebase extends Block implements ITileEntityProvider{
 
 	static final int META_LAUNCHER=0;
-	static final int META_ASSEMBLER=1;
+	static final int META_ASSEMBLER=1; //assumes stacking order
 	
 	protected BlockMinebase() {
 		super(Material.iron);
@@ -32,7 +33,7 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 			
 		case META_ASSEMBLER:
 			ItemStack item=player.getHeldItem();
-			te.setStoredProjectileType(storedProjectileType)
+			te.setStoredProjectileType(getProjectile(item));
 			return true;
 		}
 		return false;
@@ -55,8 +56,10 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 		return 2.0;
 	}
 	
-	public ProjectileType get(ItemStack is){
-		
+	public ProjectileType getProjectile(ItemStack is){
+		if(is.getItem().equals(Items.arrow)){
+			return ProjectileType.BOMB;
+		}
 		return null;
 	}
 	
