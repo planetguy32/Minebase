@@ -55,7 +55,7 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 	public void launchProjectile(TileEntityMinebase te, double xPower, double zPower){
 		
 		if(te.getStoredProjectileType()!=null){
-			EntityProjectile projectile=new EntityProjectile(te.getWorldObj(), te.getOwner(), te.getStoredProjectileType());
+			EntityProjectile projectile=new EntityProjectile(te);
 			projectile.motionX=xPower* getPowerFactor();
 			projectile.motionY=MathHelper.sqrt_double(xPower*xPower+zPower*xPower) * getPowerFactor();
 			projectile.motionZ=zPower* getPowerFactor();
