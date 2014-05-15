@@ -37,4 +37,8 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 		return new TileEntityMinebase();
 	}
 	
+	public void launchProjectile(TileEntityMinebase te, int xPower, int zPower){
+		EntityProjectile projectile=new EntityProjectile(te.getWorldObj(), null, te.getOwner());
+	}
+	
 }

@@ -10,6 +10,8 @@ public class TileEntityMinebase extends TileEntity{
 	
 	private String nodeID;
 	
+	private String owner;
+	
 	public TileEntityMinebase(){
 		nodeID="__NULL__";
 	}
@@ -17,11 +19,13 @@ public class TileEntityMinebase extends TileEntity{
 	public void readFromNBT(NBTTagCompound tag){
 		super.readFromNBT(tag);
 		setNodeID(tag.getString("network"));
+		setOwner(tag.getString("owningPlayer"));
 	}
 	
 	public void writeToNBT(NBTTagCompound tag){
 		super.writeToNBT(tag);
 		tag.setString("network", getNodeID());
+		tag.setString("owningPlayer", getOwner());
 		record=TreeRecord.map.inverse().get(nodeID);
 	}
 
@@ -31,6 +35,14 @@ public class TileEntityMinebase extends TileEntity{
 
 	private void setNodeID(String containingNetwork) {
 		this.nodeID = containingNetwork;
+	}
+
+	private String getOwner() {
+		return owner;
+	}
+
+	private void setOwner(String owner) {
+		this.owner = owner;
 	}
 
 }
