@@ -13,7 +13,7 @@ public class RenderProjectile extends Render{
 
 	ResourceLocation texture=new ResourceLocation("planetguy_Minebase:textures/projectile.png");
 	
-	IModelCustom model=AdvancedModelLoader.loadModel(new ResourceLocation("planetguy_Minebase:projectile.obj"));
+	//IModelCustom model=AdvancedModelLoader.loadModel(new ResourceLocation("planetguy_Minebase/projectile.obj"));
 	
 	@Override
 	public void doRender(Entity var1, double x, double y, double z,	float whatAre, float theseFor) {
@@ -21,7 +21,7 @@ public class RenderProjectile extends Render{
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-		model.renderAll();
+		//model.renderAll();
 		GL11.glPopMatrix();
 	}
 

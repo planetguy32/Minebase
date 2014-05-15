@@ -70,7 +70,6 @@ public class EntityProjectile extends Entity{
 		System.out.println("Projectile of type "+this.projectileType+" landed");
 		switch(this.projectileType){
 		case ANTI_AIR:
-			
 			break;
 		case BALLOON:
 			break;
