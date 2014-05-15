@@ -1,10 +1,16 @@
 package me.planetguy.minebase;
 
+import java.util.List;
+
+import cpw.mods.fml.common.registry.LanguageRegistry;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
@@ -18,6 +24,7 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 	protected BlockMinebase() {
 		super(Material.iron);
 		this.setCreativeTab(Minebase.creativeTab);
+		LanguageRegistry.instance().addNameForObject(this, "en_US", "Minebase Block");
 	}
 
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer player, int side, float i, float d, float k){
@@ -66,6 +73,12 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 			return ProjectileType.BOMB;
 		}
 		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void getSubBlocks(Item p_149666_1_, CreativeTabs p_149666_2_, List items){
+		items.add(new ItemStack(this, 1, 0));
+		items.add(new ItemStack(this, 1, 1));
 	}
 
 }

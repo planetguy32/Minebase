@@ -3,6 +3,7 @@ package me.planetguy.minebase;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlockWithMetadata;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -35,7 +36,7 @@ public class Minebase {
 	
 	@EventHandler
 	public void doPreInit(FMLPreInitializationEvent ev){
-		GameRegistry.registerBlock(new BlockMinebase(), "minebaseBlock");
+		GameRegistry.registerBlock(new BlockMinebase(), ItemBlockWithMetadata.class, "minebaseBlock");
 		GameRegistry.registerTileEntity(TileEntityMinebase.class, "MinebaseNetMarker");
 		EntityRegistry.registerModEntity(EntityProjectile.class, "minebaseProjectile", 0, this, 80, 1, true);
 	}
