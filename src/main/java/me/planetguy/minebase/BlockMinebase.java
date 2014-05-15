@@ -69,6 +69,7 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 	}
 
 	public ProjectileType getProjectile(ItemStack is){
+		if(is==null)return null;
 		if(is.getItem().equals(Items.arrow)){
 			return ProjectileType.BOMB;
 		}
