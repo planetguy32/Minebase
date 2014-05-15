@@ -46,20 +46,24 @@ public class EntityProjectile extends Entity{
 	}
 
 	public void onUpdate(){
-		//moveEntity(motionX, motionY, motionZ);
-		//motionY-=0.4903325;//=gravity/20
+        this.posX += this.motionX;
+        this.posY += this.motionY;
+        this.posZ += this.motionZ;
+        this.motionY -= 0.5;
+        this.setPosition(this.posX, this.posY, this.posZ);
+        
 		System.out.println(this);
 		Block block = this.worldObj.getBlock((int)posX, (int)posY,(int)posZ);
 
-		if (block.getMaterial() != Material.air)
-		{
+		//if (block.getMaterial() != Material.air)
+		//{
 			AxisAlignedBB axisalignedbb = block.getCollisionBoundingBoxFromPool(this.worldObj, (int)posX, (int)posY,(int)posZ);
 
 			if (axisalignedbb != null && axisalignedbb.isVecInside(this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ)))
 			{
 				onLand();
 			}
-		}
+		//}
 	}
 
 	public void onLand(){

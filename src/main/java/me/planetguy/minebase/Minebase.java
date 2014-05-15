@@ -5,6 +5,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -15,6 +17,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "planetguy_Minebase")
 public class Minebase {
+	
+	@Instance("planetguy_Minebase")
+	public static Minebase instance;
+	
+	@SidedProxy(clientSide="me.planetguy.minebase.ClientProxy", serverSide="me.planetguy.minebase.CommonProxy")
+	public static CommonProxy proxy;
 	
 	public static final CreativeTabs creativeTab=new CreativeTabs("Minebase Commander"){
 		@Override
@@ -34,6 +42,7 @@ public class Minebase {
 	
 	@EventHandler
 	public void doInit(FMLInitializationEvent ev){
+		proxy.registerRenderers();
 		//TODO recipes and creative tab
 	}
 
