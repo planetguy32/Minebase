@@ -7,6 +7,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -27,6 +28,7 @@ public class Minebase {
 	public void doPreInit(FMLPreInitializationEvent ev){
 		GameRegistry.registerBlock(new BlockMinebase(), "minebaseBlock");
 		GameRegistry.registerTileEntity(TileEntityMinebase.class, "MinebaseNetMarker");
+		EntityRegistry.registerModEntity(EntityProjectile.class, "minebaseProjectile", 0, this, 10, Integer.MAX_VALUE, true);
 	}
 	
 	@EventHandler
