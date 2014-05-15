@@ -1,14 +1,16 @@
 package me.planetguy.minebase;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockMinebase extends Block{
+public class BlockMinebase extends Block implements ITileEntityProvider{
 
-	int META_LAUNCHER=0;
-	int META_ASSEMBLER=1;
+	static final int META_LAUNCHER=0;
+	static final int META_ASSEMBLER=1;
 	
 	protected BlockMinebase() {
 		super(Material.iron);
@@ -16,12 +18,20 @@ public class BlockMinebase extends Block{
 	
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer player, int side, float i, float d, float k){
 		switch(w.getBlockMetadata(x, y, z)){
-		case 0:
+		case META_LAUNCHER:
+			
 			return true;
-		case 1:
+			
+		case META_ASSEMBLER:
+			
 			return true;
 		}
 		return false;
 	}
 
+	@Override
+	public TileEntity createNewTileEntity(World var1, int var2) {
+		return new TileEntityMinebase();
+	}
+	
 }

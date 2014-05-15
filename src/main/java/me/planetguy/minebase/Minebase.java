@@ -12,6 +12,7 @@ public class Minebase {
 	@EventHandler
 	public void doPreInit(FMLPreInitializationEvent ev){
 		GameRegistry.registerBlock(new BlockMinebase(), "minebaseBlock");
+		GameRegistry.registerTileEntity(TileEntityMinebase.class, "MinebaseNetMarker");
 	}
 	
 	@EventHandler
