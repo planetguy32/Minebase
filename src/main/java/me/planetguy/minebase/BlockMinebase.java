@@ -30,12 +30,10 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer player, int side, float i, float d, float k){
 		int myMeta=w.getBlockMetadata(x, y, z);
 		TileEntityMinebase te=(TileEntityMinebase) w.getTileEntity(x, y+myMeta, z);
-
 		switch(myMeta){
 		case META_LAUNCHER:
 			double dx=player.posX-x+0.5;
 			double dz=player.posZ-z+0.5;
-			System.out.println("("+dx+"\n   "+dz);
 			launchProjectile(te, dx, dz);
 			return true;
 
@@ -65,7 +63,7 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 	}
 
 	public double getPowerFactor(){
-		return 0.5;
+		return 0.2;
 	}
 
 	public ProjectileType getProjectile(ItemStack is){
