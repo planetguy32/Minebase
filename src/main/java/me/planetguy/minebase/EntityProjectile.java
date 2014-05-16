@@ -3,13 +3,14 @@ package me.planetguy.minebase;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntityProjectile extends EntityThrowable {
+public class EntityProjectile extends EntityArrow {
 
 	private String network;
 
@@ -32,21 +33,16 @@ public class EntityProjectile extends EntityThrowable {
 		this.posZ=te.zCoord+0.5;
 	}
 
-	public void onUpdate(){
-		super.onUpdate();
-		System.out.println(this);
-	}
-
 	@Override
 	public void readEntityFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-		network=tag.getString("network");
+		network=tag.getString("network").substring(1);
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
-		tag.setString("network", network);
+		tag.setString("network", ":"+network);
 	}
 
 	public String getNetwork() {
