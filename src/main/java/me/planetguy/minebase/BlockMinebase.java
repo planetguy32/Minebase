@@ -37,8 +37,8 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 		switch(myMeta){
 		case META_LAUNCHER:
 			TileEntityMinebase te=(TileEntityMinebase) w.getTileEntity(x, y, z);
-			double dx=player.posX-x;
-			double dz=player.posZ-z;
+			double dx=player.posX-x-.5;
+			double dz=player.posZ-z-.5;
 			System.out.println(">>>("+dx+","+dz+")");
 			launchProjectile(te, dx, dz);
 			return true;
@@ -104,5 +104,9 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 			return Blocks.gold_block.getIcon(0, 0);
 		
 	}
+	//>>>(0.6095776839028417,-0.30000001192092896) in -z
+	
+	//>>>(-0.3005073737585917,0.6314316392137016) in -x dir
 
+	//>>>(1.300000011920929,0.660749122683228) in +x dir
 }
