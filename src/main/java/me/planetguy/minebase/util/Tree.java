@@ -10,9 +10,9 @@ import com.google.common.collect.HashBiMap;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class TreeRecord {
+public class Tree {
 	
-	public static final BiMap<TreeRecord, String> map=HashBiMap.create();
+	public static final BiMap<Tree, String> map=HashBiMap.create();
 	
 	public final String id=UUID.randomUUID().toString();
 	
@@ -20,11 +20,11 @@ public class TreeRecord {
 	
 	public final World w;
 	
-	private TreeRecord parent;
+	private Tree parent;
 	
-	private ArrayList<TreeRecord> children=new ArrayList<TreeRecord>();
+	private ArrayList<Tree> children=new ArrayList<Tree>();
 	
-	public TreeRecord(TileEntity record){
+	public Tree(TileEntity record){
 		w=record.getWorldObj();
 		x=record.xCoord;
 		y=record.yCoord;
@@ -32,31 +32,31 @@ public class TreeRecord {
 		map.put(this, id);
 	}
 	
-	public TreeRecord getParent(){
+	public Tree getParent(){
 		return parent;
 	}
 	
-	public TreeRecord setParent(TreeRecord parent){
+	public Tree setParent(Tree parent){
 		this.parent=parent;
 		return this;
 	}
 	
-	public List<TreeRecord> getDirectChildren(){
+	public List<Tree> getDirectChildren(){
 		return children;
 	}
 	
-	public TreeRecord addChild(TreeRecord child){
+	public Tree addChild(Tree child){
 		children.add(child);
 		return this;
 	}
 	
-	public List<TreeRecord> getAllChildren(){
-		return getAllChildren(new ArrayList<TreeRecord>());
+	public List<Tree> getAllChildren(){
+		return getAllChildren(new ArrayList<Tree>());
 	}
 	
-	private List<TreeRecord> getAllChildren(List<TreeRecord> list){
+	private List<Tree> getAllChildren(List<Tree> list){
 		list.addAll(children);
-		for(TreeRecord r:children){
+		for(Tree r:children){
 			r.getAllChildren(list);
 		}
 		return list;

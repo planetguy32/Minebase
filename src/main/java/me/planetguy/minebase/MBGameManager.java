@@ -3,12 +3,12 @@ package me.planetguy.minebase;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import me.planetguy.minebase.util.TreeRecord;
+import me.planetguy.minebase.util.Tree;
 
 public class MBGameManager {
 
-	private HashMap<String, TreeRecord> networkRoots=new HashMap<String, TreeRecord>();
+	public HashMap<String, Tree> playerTrees=new HashMap<String, Tree>();
 	
 	
-
+	
 }

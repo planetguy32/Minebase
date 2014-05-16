@@ -1,12 +1,12 @@
 package me.planetguy.minebase;
 
-import me.planetguy.minebase.util.TreeRecord;
+import me.planetguy.minebase.util.Tree;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityMinebase extends TileEntity{
 	
-	private TreeRecord record;
+	private Tree record;
 	
 	private String nodeID;
 	
@@ -28,7 +28,7 @@ public class TileEntityMinebase extends TileEntity{
 		super.writeToNBT(tag);
 		tag.setString("network", getNodeID());
 		tag.setString("owningPlayer", getOwner());
-		record=TreeRecord.map.inverse().get(nodeID);
+		record=Tree.map.inverse().get(nodeID);
 	}
 
 	private String getNodeID() {
@@ -43,7 +43,7 @@ public class TileEntityMinebase extends TileEntity{
 		return owner;
 	}
 
-	private void setOwner(String owner) {
+	public void setOwner(String owner) {
 		this.owner = owner;
 	}
 

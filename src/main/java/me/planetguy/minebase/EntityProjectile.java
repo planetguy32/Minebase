@@ -2,6 +2,7 @@ package me.planetguy.minebase;
 
 import java.lang.reflect.Field;
 
+import me.planetguy.minebase.multiblock.PatternHub;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -101,6 +102,7 @@ public class EntityProjectile extends EntityArrow {
 			case ENERGY:
 				break;
 			case HUB:
+				PatternHub.build(worldObj, posX, posY, posZ, network);
 				break;
 			case MINE:
 				break;
