@@ -66,7 +66,7 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 	}
 
 	public double getPowerFactor(){
-		return 0.2;
+		return 1;
 	}
 
 	public ProjectileType getProjectile(ItemStack is){

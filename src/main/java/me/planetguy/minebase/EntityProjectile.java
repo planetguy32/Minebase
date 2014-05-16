@@ -65,9 +65,9 @@ public class EntityProjectile extends EntityArrow {
 			int traceResult=Trail.canPlaceBuilding(worldObj, (int)posX, (int)posY, (int)posZ);
 			if(traceResult==-1){
 				setDead();
-				worldObj.spawnParticle("", posX, posY, posZ, motionX, motionY, motionZ);
-			}else if(!(worldObj.getBlock((int)posX,traceResult,(int)posZ) instanceof BlockMinebase)){
-				worldObj.setBlock((int)posX,traceResult,(int)posZ, Blocks.lapis_block);
+				worldObj.spawnParticle("largeexplode", posX, posY, posZ, motionX, motionY, motionZ);
+			}else if(!(worldObj.getBlock((int)posX,traceResult+1,(int)posZ) instanceof BlockMinebase)){
+				worldObj.setBlock((int)posX,traceResult+1,(int)posZ, Blocks.lapis_block);
 			}
 		}
 			
