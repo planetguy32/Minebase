@@ -66,7 +66,7 @@ public class EntityProjectile extends EntityArrow {
 			if(traceResult==-1){
 				setDead();
 				worldObj.spawnParticle("", posX, posY, posZ, motionX, motionY, motionZ);
-			}else{
+			}else if(!(worldObj.getBlock((int)posX,traceResult,(int)posZ) instanceof BlockMinebase)){
 				worldObj.setBlock((int)posX,traceResult,(int)posZ, Blocks.lapis_block);
 			}
 		}
