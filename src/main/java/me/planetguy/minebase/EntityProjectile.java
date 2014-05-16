@@ -62,6 +62,7 @@ public class EntityProjectile extends EntityArrow {
 			case BALLOON:
 				break;
 			case BOMB:
+				this.worldObj.createExplosion(this, posX, posY, posZ, 4.0f, true);
 				break;
 			case BRIDGE:
 				break;
