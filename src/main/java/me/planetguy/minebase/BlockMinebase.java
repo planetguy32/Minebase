@@ -61,7 +61,6 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 			projectile.motionX=xPower* getPowerFactor();
 			projectile.motionY=MathHelper.sqrt_double(xPower*xPower+zPower*xPower) * getPowerFactor();
 			projectile.motionZ=zPower* getPowerFactor();
-
 		}
 	}
 

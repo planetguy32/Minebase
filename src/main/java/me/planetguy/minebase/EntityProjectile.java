@@ -15,6 +15,11 @@ public class EntityProjectile extends EntityThrowable {
 
 	private final ProjectileType projectileType;
 
+	public EntityProjectile(World w){
+		super(w);
+		projectileType=null;
+	}
+
 	public EntityProjectile(TileEntityMinebase te){
 		super(te.getWorldObj());
 		String network=te.getOwner();
@@ -22,7 +27,14 @@ public class EntityProjectile extends EntityThrowable {
 		this.network=network;
 		this.projectileType=type;
 		this.setSize(0.5F, 0.5F);
-		
+		this.posX=te.xCoord+0.5;
+		this.posY=te.yCoord+1.5;
+		this.posZ=te.zCoord+0.5;
+	}
+
+	public void onUpdate(){
+		super.onUpdate();
+		System.out.println(this);
 	}
 
 	@Override
@@ -47,46 +59,48 @@ public class EntityProjectile extends EntityThrowable {
 
 	public void onImpact(MovingObjectPosition var1) {
 		System.out.println("Projectile of type "+this.projectileType+" landed");
-		switch(this.projectileType){
-		case ANTI_AIR:
-			break;
-		case BALLOON:
-			break;
-		case BOMB:
-			break;
-		case BRIDGE:
-			break;
-		case CLUSTER:
-			break;
-		case CRAWLER:
-			break;
-		case EMP:
-			break;
-		case ENERGY:
-			break;
-		case HUB:
-			break;
-		case MINE:
-			break;
-		case MISSILE:
-			break;
-		case OFFENSE:
-			break;
-		case RECLAIM:
-			break;
-		case REPAIR:
-			break;
-		case SHIELD:
-			break;
-		case SPIKE:
-			break;
-		case TOWER:
-			break;
-		case VIRUS:
-			break;
-		default:
-			break;
-		
+		if(projectileType!=null){
+			switch(this.projectileType){
+			case ANTI_AIR:
+				break;
+			case BALLOON:
+				break;
+			case BOMB:
+				break;
+			case BRIDGE:
+				break;
+			case CLUSTER:
+				break;
+			case CRAWLER:
+				break;
+			case EMP:
+				break;
+			case ENERGY:
+				break;
+			case HUB:
+				break;
+			case MINE:
+				break;
+			case MISSILE:
+				break;
+			case OFFENSE:
+				break;
+			case RECLAIM:
+				break;
+			case REPAIR:
+				break;
+			case SHIELD:
+				break;
+			case SPIKE:
+				break;
+			case TOWER:
+				break;
+			case VIRUS:
+				break;
+			default:
+				break;
+
+			}
 		}
 		this.setDead();
 	}
