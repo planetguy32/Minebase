@@ -61,17 +61,7 @@ public class EntityProjectile extends EntityArrow {
 	
 	public void onUpdate(){
 		super.onUpdate();
-		if(projectileType!=null&&projectileType.isBuilding){
-			int traceResult=Trail.canPlaceBuilding(worldObj, (int)posX, (int)posY, (int)posZ);
-			if(traceResult==-1){
-				setDead();
-				worldObj.spawnParticle("largeexplode", posX, posY, posZ, motionX, motionY, motionZ);
-			}else if(!(worldObj.getBlock((int)posX,traceResult+1,(int)posZ) instanceof BlockMinebase)){
-				worldObj.setBlock((int)posX,traceResult+1,(int)posZ, Blocks.lapis_block);
-			}
-		}
-			
-			
+		leaveTrace();
 		try {
 			if(inGround.getBoolean(this))
 				onImpact();
@@ -139,6 +129,19 @@ public class EntityProjectile extends EntityArrow {
 			}
 		}
 		this.setDead();
+	}
+	
+	public void leaveTrace(){
+		if(projectileType!=null&&projectileType.isBuilding){
+			int traceResult=Trail.canPlaceBuilding(worldObj, (int)posX, (int)posY, (int)posZ);
+			if(traceResult==-1){
+				setDead();
+				worldObj.spawnParticle("largeexplode", posX, posY, posZ, motionX, motionY, motionZ);
+			}else if(!(worldObj.getBlock((int)posX,traceResult+1,(int)posZ) instanceof BlockMinebase)&&!(worldObj.getBlock((int)posX,traceResult,(int)posZ) instanceof BlockMinebase)){
+				worldObj.setBlock((int)posX,traceResult+1,(int)posZ, Blocks.lapis_block);
+			}
+		}
+
 	}
 
 }
