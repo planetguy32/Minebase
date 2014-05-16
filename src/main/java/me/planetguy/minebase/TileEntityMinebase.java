@@ -29,7 +29,7 @@ public class TileEntityMinebase extends TileEntity{
 
 	public void writeToNBT(NBTTagCompound tag){
 		super.writeToNBT(tag);
-		if(!getNodeID().equals(""))
+		if(getNodeID()!=null&&!getNodeID().equals(""))
 			tag.setString("network", getNodeID());
 		tag.setString("owningPlayer", getOwner());
 		record=Tree.map.inverse().get(nodeID);
