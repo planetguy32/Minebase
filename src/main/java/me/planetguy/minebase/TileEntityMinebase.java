@@ -5,28 +5,32 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityMinebase extends TileEntity{
-	
+
 	private Tree record;
-	
+
 	private String nodeID;
-	
+
 	private ProjectileType storedProjectileType;
-	
+
 	private String owner="__NULL__";
-	
+
 	public TileEntityMinebase(){
-		
+
 	}
-	
+
 	public void readFromNBT(NBTTagCompound tag){
 		super.readFromNBT(tag);
-		setNodeID(tag.getString("network"));
+		if(tag.hasKey("network"))
+			setNodeID(tag.getString("network"));
+		else
+			setNodeID("");
 		setOwner(tag.getString("owningPlayer"));
 	}
-	
+
 	public void writeToNBT(NBTTagCompound tag){
 		super.writeToNBT(tag);
-		tag.setString("network", getNodeID());
+		if(!getNodeID().equals(""))
+			tag.setString("network", getNodeID());
 		tag.setString("owningPlayer", getOwner());
 		record=Tree.map.inverse().get(nodeID);
 	}

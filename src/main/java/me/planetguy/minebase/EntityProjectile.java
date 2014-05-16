@@ -139,6 +139,11 @@ public class EntityProjectile extends EntityArrow {
 			if(traceResult==-1){
 				setDead();
 				worldObj.spawnParticle("largeexplode", posX, posY, posZ, motionX, motionY, motionZ);
+				try{
+					((ITrailDependent)worldObj.getTileEntity(parentX, parentY, parentZ)).onChildExplode((int)posX, (int)posY, (int)posZ);
+				}catch(ClassCastException e){
+					e.printStackTrace();
+				}
 			}else if(!(worldObj.getBlock((int)posX,traceResult+1,(int)posZ) instanceof BlockMinebase)&&!(worldObj.getBlock((int)posX,traceResult,(int)posZ) instanceof BlockMinebase)){
 				worldObj.setBlock((int)posX,traceResult+1,(int)posZ, Minebase.instance.mainBlock);
 				worldObj.setBlockMetadataWithNotify((int)posX,traceResult+1,(int)posZ, BlockMinebase.META_TRAIL, 3);
