@@ -48,15 +48,13 @@ public class EntityProjectile extends EntityArrow {
 	
 	@Override
 	public void readEntityFromNBT(NBTTagCompound tag) {
-		super.readFromNBT(tag);
-		projectileType=ProjectileType.valueOf(tag.getString("type"));
+		//projectileType=ProjectileType.valueOf(tag.getString("type"));
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound tag) {
-		super.writeToNBT(tag);
-		if(projectileType!=null)
-			tag.setString("type", projectileType.toString());
+		//if(projectileType!=null)
+		//	tag.setString("type", projectileType.toString());
 	}
 	
 	public void onUpdate(){
