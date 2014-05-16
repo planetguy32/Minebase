@@ -14,6 +14,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -88,6 +89,18 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 	public void getSubBlocks(Item p_149666_1_, CreativeTabs p_149666_2_, List items){
 		items.add(new ItemStack(this, 1, 0));
 		items.add(new ItemStack(this, 1, 1));
+	}
+	
+	public IIcon getIcon(int side, int meta){
+		if(meta==META_TRAIL)
+			return Blocks.lapis_block.getIcon(0, 0);
+		else if(meta==META_PLATFORM)
+			return Blocks.iron_block.getIcon(0,0);
+		else if(meta==META_LAUNCHER)
+			return Blocks.diamond_block.getIcon(0, 0);
+		else
+			return Blocks.gold_block.getIcon(0, 0);
+		
 	}
 
 }
