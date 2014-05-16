@@ -16,14 +16,14 @@ public class Trail {
 		bannedBlocks.add(Blocks.lava);
 	}
 	
-	public static boolean isValidTrail(World w, int x, int y, int z){
+	public static int canPlaceBuilding(World w, int x, int y, int z){
 		while(!w.getBlock(x, y, z).equals(Blocks.air)){
 			y--;
 			if(y<=0)//handle void holes
-				return false;
+				return -1;
 		}
 		Block b=w.getBlock(x, y, z);
-		return !bannedBlocks.contains(b);
+		return bannedBlocks.contains(b) ? -1 : y;
 	}
 
 }

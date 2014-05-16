@@ -44,7 +44,7 @@ public class EntityProjectile extends EntityArrow {
 		this.posZ=te.zCoord+0.5;
 	}
 
-	/*
+	
 	@Override
 	public void readEntityFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
@@ -54,13 +54,13 @@ public class EntityProjectile extends EntityArrow {
 	@Override
 	public void writeEntityToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
-		tag.setString("type", projectileType.toString());
+		if(projectileType!=null)
+			tag.setString("type", projectileType.toString());
 	}
-	*/
 	
 	public void onUpdate(){
 		super.onUpdate();
-		if(projectileType.isBuilding&&!Trail.isValidTrail(worldObj, (int)posX, (int)posY, (int)posZ))
+		if(projectileType!=null&&projectileType.isBuilding&&!Trail.canPlaceBuilding(worldObj, (int)posX, (int)posY, (int)posZ))
 			setDead();
 			
 		try {
