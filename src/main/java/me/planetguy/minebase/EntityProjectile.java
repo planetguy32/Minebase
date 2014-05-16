@@ -102,7 +102,7 @@ public class EntityProjectile extends EntityArrow {
 			case ENERGY:
 				break;
 			case HUB:
-				PatternHub.build(worldObj, posX, posY, posZ, network);
+				PatternHub.build(worldObj, (int)posX, (int)posY, (int)posZ, network);
 				break;
 			case MINE:
 				break;

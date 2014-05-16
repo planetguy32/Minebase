@@ -40,6 +40,7 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 			return true;
 
 		case META_ASSEMBLER:
+			if(te==null)return false;
 			ItemStack item=player.getHeldItem();
 			te.setStoredProjectileType(getProjectile(item));
 			return true;
