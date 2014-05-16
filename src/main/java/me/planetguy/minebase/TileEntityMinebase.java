@@ -12,10 +12,10 @@ public class TileEntityMinebase extends TileEntity{
 	
 	private ProjectileType storedProjectileType;
 	
-	private String owner;
+	private String owner="__NULL__";
 	
 	public TileEntityMinebase(){
-		nodeID="__NULL__";
+		
 	}
 	
 	public void readFromNBT(NBTTagCompound tag){

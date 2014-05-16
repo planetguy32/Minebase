@@ -3,11 +3,13 @@ package me.planetguy.minebase;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntityProjectile extends Entity{
+public class EntityProjectile extends EntityThrowable {
 
 	private String network;
 
@@ -24,18 +26,13 @@ public class EntityProjectile extends Entity{
 	}
 
 	@Override
-	protected void entityInit() {
-		//Don't see anything critical to do here...
-	}
-
-	@Override
-	protected void readEntityFromNBT(NBTTagCompound tag) {
+	public void readEntityFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 		network=tag.getString("network");
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound tag) {
+	public void writeEntityToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		tag.setString("network", network);
 	}
@@ -48,28 +45,7 @@ public class EntityProjectile extends Entity{
 		this.network = network;
 	}
 
-	public void onUpdate(){
-        this.posX += this.motionX;
-        this.posY += this.motionY;
-        this.posZ += this.motionZ;
-        this.motionY -= 0.5;
-        this.setPosition(this.posX, this.posY, this.posZ);
-        
-		System.out.println(this);
-		Block block = this.worldObj.getBlock((int)posX, (int)posY,(int)posZ);
-
-		//if (block.getMaterial() != Material.air)
-		//{
-			AxisAlignedBB axisalignedbb = block.getCollisionBoundingBoxFromPool(this.worldObj, (int)posX, (int)posY,(int)posZ);
-
-			if (axisalignedbb != null && axisalignedbb.isVecInside(this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ)))
-			{
-				onLand();
-			}
-		//}
-	}
-
-	public void onLand(){
+	public void onImpact(MovingObjectPosition var1) {
 		System.out.println("Projectile of type "+this.projectileType+" landed");
 		switch(this.projectileType){
 		case ANTI_AIR:
