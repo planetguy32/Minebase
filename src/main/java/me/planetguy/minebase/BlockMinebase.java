@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 public class BlockMinebase extends Block implements ITileEntityProvider{
 
 	public static final int META_LAUNCHER=0;
-	public static final int META_ASSEMBLER=1; //assumes stacking order
+	public static final int META_ASSEMBLER=1;
 	public static final int META_PLATFORM=2;
 	public static final int META_TRAIL=3;
 
@@ -33,15 +33,17 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer player, int side, float i, float d, float k){
 		int myMeta=w.getBlockMetadata(x, y, z);
-		TileEntityMinebase te=(TileEntityMinebase) w.getTileEntity(x, y+myMeta, z);
+		
 		switch(myMeta){
 		case META_LAUNCHER:
-			double dx=player.posX-x+0.5;
-			double dz=player.posZ-z+0.5;
+			TileEntityMinebase te=(TileEntityMinebase) w.getTileEntity(x, y, z);
+			double dx=player.posX-x+1;
+			double dz=player.posZ-z+1;
 			launchProjectile(te, dx, dz);
 			return true;
 
 		case META_ASSEMBLER:
+			te=(TileEntityMinebase) w.getTileEntity(x, y+1, z);
 			if(te==null)return false;
 			ItemStack item=player.getHeldItem();
 			te.setStoredProjectileType(getProjectile(item));
@@ -60,7 +62,6 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 	}
 
 	public void launchProjectile(TileEntityMinebase te, double xPower, double zPower){
-		
 		if(te.getStoredProjectileType()!=null){
 			EntityProjectile projectile=new EntityProjectile(te);
 			te.setStoredProjectileType(null);

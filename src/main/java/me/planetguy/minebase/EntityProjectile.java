@@ -19,13 +19,13 @@ public class EntityProjectile extends EntityArrow {
 	private int parentX,
 	parentY,
 	parentZ;
-	
+
 	private String network;
 
 	private ProjectileType projectileType;
 
 	final Field inGround;
-	
+
 	public EntityProjectile(World w) {
 		super(w);
 		projectileType=null;
@@ -47,9 +47,12 @@ public class EntityProjectile extends EntityArrow {
 		this.posX=te.xCoord+0.5;
 		this.posY=te.yCoord+1.5;
 		this.posZ=te.zCoord+0.5;
+		parentX=te.xCoord;
+		parentY=te.yCoord;
+		parentZ=te.zCoord;
 	}
 
-	
+
 	@Override
 	public void readEntityFromNBT(NBTTagCompound tag) {
 		//projectileType=ProjectileType.valueOf(tag.getString("type"));
@@ -60,9 +63,10 @@ public class EntityProjectile extends EntityArrow {
 		//if(projectileType!=null)
 		//	tag.setString("type", projectileType.toString());
 	}
-	
+
 	public void onUpdate(){
 		super.onUpdate();
+		if(worldObj.isRemote)return;
 		leaveTrace();
 		try {
 			if(inGround.getBoolean(this))
@@ -74,6 +78,7 @@ public class EntityProjectile extends EntityArrow {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	public String getNetwork() {
@@ -85,6 +90,7 @@ public class EntityProjectile extends EntityArrow {
 	}
 
 	public void onImpact() {
+		if(worldObj.isRemote)return;
 		System.out.println("Projectile of type "+this.projectileType+" landed");
 		if(projectileType!=null){
 			switch(this.projectileType){
@@ -132,7 +138,7 @@ public class EntityProjectile extends EntityArrow {
 		}
 		this.setDead();
 	}
-	
+
 	public void leaveTrace(){
 		if(projectileType!=null&&projectileType.isBuilding){
 			int traceResult=Trail.canPlaceBuilding(worldObj, (int)posX, (int)posY, (int)posZ);
@@ -147,12 +153,12 @@ public class EntityProjectile extends EntityArrow {
 			}else if(!(worldObj.getBlock((int)posX,traceResult+1,(int)posZ) instanceof BlockMinebase)&&!(worldObj.getBlock((int)posX,traceResult,(int)posZ) instanceof BlockMinebase)){
 				worldObj.setBlock((int)posX,traceResult+1,(int)posZ, Minebase.instance.mainBlock);
 				worldObj.setBlockMetadataWithNotify((int)posX,traceResult+1,(int)posZ, BlockMinebase.META_TRAIL, 3);
-				//try{
+				try{
 					((ITrailDependent)worldObj.getTileEntity((int)posX,traceResult+1,(int)posZ))
-				.setParent(worldObj.getTileEntity(parentX, parentY, parentZ));
-				//}catch(ClassCastException e){
-				//	e.printStackTrace();
-				//}
+					.setParent(worldObj.getTileEntity(parentX, parentY, parentZ));
+				}catch(ClassCastException e){
+					e.printStackTrace();
+				}
 				parentX=(int)posX;
 				parentY=traceResult+1;
 				parentZ=(int)posZ;
