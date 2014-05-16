@@ -9,6 +9,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,8 +19,9 @@ import net.minecraft.world.World;
 
 public class BlockMinebase extends Block implements ITileEntityProvider{
 
-	static final int META_LAUNCHER=0;
-	static final int META_ASSEMBLER=1; //assumes stacking order
+	public static final int META_LAUNCHER=0;
+	public static final int META_ASSEMBLER=1; //assumes stacking order
+	public static final int META_PLATFORM=2;
 
 	protected BlockMinebase() {
 		super(Material.iron);
@@ -70,6 +72,8 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 		if(is==null)return null;
 		if(is.getItem().equals(Items.arrow)){
 			return ProjectileType.BOMB;
+		}else if(is.getItem().equals(Item.getItemFromBlock(Blocks.chest))){
+			return ProjectileType.HUB;
 		}
 		return null;
 	}
