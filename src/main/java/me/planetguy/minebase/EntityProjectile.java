@@ -18,7 +18,7 @@ public class EntityProjectile extends EntityArrow {
 
 	private ProjectileType projectileType;
 
-	Field inGround;
+	final Field inGround;
 	
 	public EntityProjectile(World w) {
 		super(w);
@@ -32,7 +32,7 @@ public class EntityProjectile extends EntityArrow {
 	}
 
 	public EntityProjectile(TileEntityMinebase te){
-		super(te.getWorldObj());
+		this(te.getWorldObj());
 		String network=te.getOwner();
 		ProjectileType type=te.getStoredProjectileType();
 		this.network=network;

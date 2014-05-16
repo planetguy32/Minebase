@@ -1,5 +1,6 @@
 package me.planetguy.minebase;
 
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -22,6 +23,8 @@ public class Minebase {
 	@Instance("planetguy_Minebase")
 	public static Minebase instance;
 	
+	public Block mainBlock;
+	
 	@SidedProxy(clientSide="me.planetguy.minebase.ClientProxy", serverSide="me.planetguy.minebase.CommonProxy")
 	public static CommonProxy proxy;
 	
@@ -36,7 +39,8 @@ public class Minebase {
 	
 	@EventHandler
 	public void doPreInit(FMLPreInitializationEvent ev){
-		GameRegistry.registerBlock(new BlockMinebase(), MBBlockWithMeta.class, "minebaseBlock");
+		mainBlock=new BlockMinebase();
+		GameRegistry.registerBlock(mainBlock, MBBlockWithMeta.class, "minebaseBlock");
 		GameRegistry.registerTileEntity(TileEntityMinebase.class, "MinebaseNetMarker");
 		EntityRegistry.registerModEntity(EntityProjectile.class, "minebaseProjectile", 0, this, 80, 1, true);
 	}
