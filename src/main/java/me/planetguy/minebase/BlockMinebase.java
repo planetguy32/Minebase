@@ -68,13 +68,13 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 			te.setStoredProjectileType(null);
 			te.getWorldObj().spawnEntityInWorld(projectile);
 			projectile.motionX=-xPower* getPowerFactor();
-			projectile.motionY=MathHelper.sqrt_double(xPower*xPower+zPower*xPower) * getPowerFactor();
+			projectile.motionY=MathHelper.sqrt_double(xPower*xPower+zPower*zPower) * getPowerFactor();
 			projectile.motionZ=-zPower* getPowerFactor();
 		}
 	}
 
 	public double getPowerFactor(){
-		return 1;
+		return 0.5;
 	}
 
 	public ProjectileType getProjectile(ItemStack is){
