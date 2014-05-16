@@ -37,8 +37,8 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 		switch(myMeta){
 		case META_LAUNCHER:
 			TileEntityMinebase te=(TileEntityMinebase) w.getTileEntity(x, y, z);
-			double dx=player.posX-x+1;
-			double dz=player.posZ-z+1;
+			double dx=player.posX-x;
+			double dz=player.posZ-z;
 			launchProjectile(te, dx, dz);
 			return true;
 
