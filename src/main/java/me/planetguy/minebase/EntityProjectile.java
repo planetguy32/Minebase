@@ -14,7 +14,7 @@ public class EntityProjectile extends EntityArrow {
 
 	private String network;
 
-	private final ProjectileType projectileType;
+	private ProjectileType projectileType;
 
 	public EntityProjectile(World w){
 		super(w);
@@ -36,13 +36,13 @@ public class EntityProjectile extends EntityArrow {
 	@Override
 	public void readEntityFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
-		network=tag.getString("network").substring(1);
+		projectileType=ProjectileType.valueOf(tag.getString("type"));
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
-		tag.setString("network", ":"+network);
+		tag.setString("type", projectileType.toString());
 	}
 
 	public String getNetwork() {
@@ -96,7 +96,6 @@ public class EntityProjectile extends EntityArrow {
 				break;
 			default:
 				break;
-
 			}
 		}
 		this.setDead();
