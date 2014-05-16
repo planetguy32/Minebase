@@ -1,6 +1,10 @@
 package me.planetguy.minebase;
 
+import net.minecraft.tileentity.TileEntity;
+
 public interface ITrailDependent {
+	
+	public void setParent(TileEntity parent);
 	
 	public void onParentExplode();
 	

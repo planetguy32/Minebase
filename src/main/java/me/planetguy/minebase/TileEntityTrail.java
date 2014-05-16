@@ -9,12 +9,27 @@ public class TileEntityTrail extends TileEntity implements ITrailDependent {
 	
 	public int childX, childY, childZ;
 	
-	public TileEntityTrail(TileEntity parent){ //construct trail from the structure that launched it
-		
+	public boolean shouldExplode=false;
+	
+	public TileEntityTrail(){ 
+		//construct trail from the structure that launched it
 	}
 	
+	public void setParent(TileEntity parent){
+		parentX=parent.xCoord;
+		parentY=parent.yCoord;
+		parentZ=parent.zCoord;
+		if(parent instanceof ITrailDependent){
+			((ITrailDependent)parent).onPlaceChild(xCoord, yCoord, zCoord);
+		}
+
+	}
+	
+	@Override
 	public void onPlaceChild(int x, int y, int z){
-		
+		childX=x;
+		childY=y;
+		childZ=z;
 	}
 
 	@Override

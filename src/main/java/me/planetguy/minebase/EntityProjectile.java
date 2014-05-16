@@ -16,6 +16,10 @@ import net.minecraft.world.World;
 
 public class EntityProjectile extends EntityArrow {
 
+	private int parentX,
+	parentY,
+	parentZ;
+	
 	private String network;
 
 	private ProjectileType projectileType;
@@ -136,7 +140,13 @@ public class EntityProjectile extends EntityArrow {
 				setDead();
 				worldObj.spawnParticle("largeexplode", posX, posY, posZ, motionX, motionY, motionZ);
 			}else if(!(worldObj.getBlock((int)posX,traceResult+1,(int)posZ) instanceof BlockMinebase)&&!(worldObj.getBlock((int)posX,traceResult,(int)posZ) instanceof BlockMinebase)){
-				worldObj.setBlock((int)posX,traceResult+1,(int)posZ, Blocks.lapis_block);
+				worldObj.setBlock((int)posX,traceResult+1,(int)posZ, Minebase.instance.mainBlock);
+				worldObj.setBlockMetadataWithNotify((int)posX,traceResult+1,(int)posZ, BlockMinebase.META_TRAIL, 3);
+				((ITrailDependent)worldObj.getTileEntity((int)posX,traceResult+1,(int)posZ))
+				.setParent(worldObj.getTileEntity(parentX, parentY, parentZ));
+				parentX=(int)posX;
+				parentY=traceResult+1;
+				parentZ=(int)posZ;
 			}
 		}
 

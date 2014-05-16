@@ -22,6 +22,7 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 	public static final int META_LAUNCHER=0;
 	public static final int META_ASSEMBLER=1; //assumes stacking order
 	public static final int META_PLATFORM=2;
+	public static final int META_TRAIL=3;
 
 	protected BlockMinebase() {
 		super(Material.iron);
@@ -50,7 +51,11 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileEntityMinebase();
+		if(meta==META_LAUNCHER)
+			return new TileEntityMinebase();
+		if(meta==META_TRAIL)
+			return new TileEntityTrail();
+		return new TileEntity();
 	}
 
 	public void launchProjectile(TileEntityMinebase te, double xPower, double zPower){
