@@ -39,6 +39,7 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 			TileEntityMinebase te=(TileEntityMinebase) w.getTileEntity(x, y, z);
 			double dx=player.posX-x;
 			double dz=player.posZ-z;
+			System.out.println(">>>("+dx+","+dz+")");
 			launchProjectile(te, dx, dz);
 			return true;
 
