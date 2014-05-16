@@ -1,5 +1,7 @@
 package me.planetguy.minebase;
 
+import java.lang.reflect.Field;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -16,9 +18,17 @@ public class EntityProjectile extends EntityArrow {
 
 	private ProjectileType projectileType;
 
-	public EntityProjectile(World w){
+	Field inGround;
+	
+	public EntityProjectile(World w) {
 		super(w);
 		projectileType=null;
+		try{
+			inGround=EntityArrow.class.getDeclaredField("inGround");
+			inGround.setAccessible(true);
+		}catch(Exception e){
+			throw new RuntimeException(e);
+		}
 	}
 
 	public EntityProjectile(TileEntityMinebase te){
@@ -33,6 +43,7 @@ public class EntityProjectile extends EntityArrow {
 		this.posZ=te.zCoord+0.5;
 	}
 
+	/*
 	@Override
 	public void readEntityFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
@@ -44,6 +55,21 @@ public class EntityProjectile extends EntityArrow {
 		super.writeToNBT(tag);
 		tag.setString("type", projectileType.toString());
 	}
+	*/
+	
+	public void onUpdate(){
+		super.onUpdate();
+		try {
+			if(inGround.getBoolean(this))
+				onImpact();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public String getNetwork() {
 		return network;
@@ -53,7 +79,7 @@ public class EntityProjectile extends EntityArrow {
 		this.network = network;
 	}
 
-	public void onImpact(MovingObjectPosition var1) {
+	public void onImpact() {
 		System.out.println("Projectile of type "+this.projectileType+" landed");
 		if(projectileType!=null){
 			switch(this.projectileType){
