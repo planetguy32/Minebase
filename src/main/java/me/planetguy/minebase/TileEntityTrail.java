@@ -42,9 +42,18 @@ public class TileEntityTrail extends TileEntity implements ITrailDependent {
 	public void onChildExplode(int x, int y, int z) {
 		((ITrailDependent)worldObj.getTileEntity(x,y,z)).onParentExplode();
 		explode();
+		
+	}
+	
+	public void onTrailExplode(){
+		if(worldObj.getTileEntity(xCoord, yCoord, zCoord)instanceof TileEntityTrail){
+			((TileEntityTrail) worldObj.getTileEntity(xCoord, yCoord, zCoord)).onTrailExplode();
+			explode();
+		}
 	}
 	
 	public void explode(){
+		System.out.println(this + "\nExploding...\n");
 		worldObj.setBlock(xCoord, yCoord, zCoord, Blocks.air);
 		worldObj.spawnParticle("largeexplode", xCoord, yCoord, zCoord, 0,0,0);
 	}
