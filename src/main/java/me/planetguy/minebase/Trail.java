@@ -17,7 +17,7 @@ public class Trail {
 	}
 	
 	public static int canPlaceBuilding(World w, int x, int y, int z){
-		while(!w.getBlock(x, y, z).equals(Blocks.air)){
+		while(w.getBlock(x, y, z).equals(Blocks.air)){
 			y--;
 			if(y<=0)//handle void holes
 				return -1;

@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
@@ -60,8 +61,16 @@ public class EntityProjectile extends EntityArrow {
 	
 	public void onUpdate(){
 		super.onUpdate();
-		if(projectileType!=null&&projectileType.isBuilding&&!Trail.canPlaceBuilding(worldObj, (int)posX, (int)posY, (int)posZ))
-			setDead();
+		if(projectileType!=null&&projectileType.isBuilding){
+			int traceResult=Trail.canPlaceBuilding(worldObj, (int)posX, (int)posY, (int)posZ);
+			if(traceResult==-1){
+				setDead();
+				worldObj.spawnParticle("", posX, posY, posZ, motionX, motionY, motionZ);
+			}else{
+				worldObj.setBlock((int)posX,traceResult,(int)posZ, Blocks.lapis_block);
+			}
+		}
+			
 			
 		try {
 			if(inGround.getBoolean(this))
