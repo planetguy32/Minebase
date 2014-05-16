@@ -60,6 +60,9 @@ public class EntityProjectile extends EntityArrow {
 	
 	public void onUpdate(){
 		super.onUpdate();
+		if(projectileType.isBuilding&&!Trail.isValidTrail(worldObj, (int)posX, (int)posY, (int)posZ))
+			setDead();
+			
 		try {
 			if(inGround.getBoolean(this))
 				onImpact();
