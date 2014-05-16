@@ -2,6 +2,7 @@ package me.planetguy.minebase.multiblock;
 
 import me.planetguy.minebase.BlockMinebase;
 import me.planetguy.minebase.Minebase;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class PatternHub {
