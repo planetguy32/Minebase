@@ -14,13 +14,13 @@ public class EntityProjectile extends Entity{
 	private final ProjectileType projectileType;
 
 	public EntityProjectile(TileEntityMinebase te){
-		
 		super(te.getWorldObj());
 		String network=te.getOwner();
 		ProjectileType type=te.getStoredProjectileType();
 		this.network=network;
 		this.projectileType=type;
 		this.setSize(0.5F, 0.5F);
+		
 	}
 
 	@Override

@@ -56,11 +56,12 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 		
 		if(te.getStoredProjectileType()!=null){
 			EntityProjectile projectile=new EntityProjectile(te);
+			te.setStoredProjectileType(null);
+			te.getWorldObj().spawnEntityInWorld(projectile);
 			projectile.motionX=xPower* getPowerFactor();
 			projectile.motionY=MathHelper.sqrt_double(xPower*xPower+zPower*xPower) * getPowerFactor();
 			projectile.motionZ=zPower* getPowerFactor();
-			te.setStoredProjectileType(null);
-			te.getWorldObj().spawnEntityInWorld(projectile);
+
 		}
 	}
 
