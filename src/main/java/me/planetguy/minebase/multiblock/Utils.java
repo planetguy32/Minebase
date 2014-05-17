@@ -33,5 +33,16 @@ public class Utils {
 			}
 		}
 	}
+	
+	public static void buildPlane(World w, int x, int y, int z,
+			int platformSize, Block b) {
+		for(int dx=-platformSize; dx<=platformSize; dx++){
+			for(int dz=-platformSize; dz<=platformSize; dz++){
+				w.setBlock(x+dx, y, z+dz, b);
+			}
+		}
+	}
+	
+	
 
 }

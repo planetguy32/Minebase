@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 
 import me.planetguy.minebase.multiblock.PatternHub;
 import me.planetguy.minebase.multiblock.PatternTower;
+import me.planetguy.minebase.multiblock.Trail;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
