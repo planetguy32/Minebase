@@ -2,6 +2,7 @@ package me.planetguy.minebase;
 
 import java.lang.reflect.Field;
 
+import me.planetguy.minebase.multiblock.PatternBridge;
 import me.planetguy.minebase.multiblock.PatternHub;
 import me.planetguy.minebase.multiblock.PatternTower;
 import me.planetguy.minebase.multiblock.Trail;
@@ -104,6 +105,7 @@ public class EntityProjectile extends EntityArrow {
 				this.worldObj.createExplosion(this, posX, posY, posZ, 4.0f, true);
 				break;
 			case BRIDGE:
+				PatternBridge.build(worldObj, (int)posX, (int)posY, (int)posZ, network);
 				break;
 			case CLUSTER:
 				break;

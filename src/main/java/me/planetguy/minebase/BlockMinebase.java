@@ -85,6 +85,8 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 			return ProjectileType.HUB;
 		}else if(is.getItem().equals(Items.ender_eye)){
 			return ProjectileType.TOWER;
+		}else if(is.getItem().equals(Item.getItemFromBlock(Blocks.wool))){
+			return ProjectileType.BRIDGE;
 		}
 		return null;
 	}
