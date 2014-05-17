@@ -3,6 +3,7 @@ package me.planetguy.minebase;
 import java.lang.reflect.Field;
 
 import me.planetguy.minebase.multiblock.PatternHub;
+import me.planetguy.minebase.multiblock.PatternTower;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -129,6 +130,7 @@ public class EntityProjectile extends EntityArrow {
 			case SPIKE:
 				break;
 			case TOWER:
+				PatternTower.build(worldObj,(int)posX, (int)posY, (int)posZ, network);
 				break;
 			case VIRUS:
 				break;

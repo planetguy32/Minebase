@@ -16,6 +16,7 @@ public class PatternHub {
 		w.setBlockMetadataWithNotify(x, y+1, z, BlockMinebase.META_ASSEMBLER, 3);
 		
 		Utils.buildPlatform(w, x, y, z, platformSize, parent);
+		((TileEntityMinebase)w.getTileEntity(x, y+2, z)).setOwner(parent);
 
 	}
 	

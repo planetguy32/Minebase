@@ -14,7 +14,6 @@ public class Utils {
 			for(int dz=-platformSize; dz<=platformSize; dz++){
 				w.setBlock(x+dx, y, z+dz, Minebase.instance.mainBlock);
 				w.setBlockMetadataWithNotify(x+dx, y, z+dz, BlockMinebase.META_PLATFORM, 3);
-				((TileEntityMinebase)w.getTileEntity(x, y+2, z)).setOwner(parent);
 			}
 		}
 		
