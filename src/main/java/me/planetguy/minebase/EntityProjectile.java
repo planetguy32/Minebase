@@ -149,6 +149,9 @@ public class EntityProjectile extends EntityArrow {
 				break;
 			}
 		}
+		for(TileEntityTrail te:trails){
+			te.setAbsoluteChild(worldObj.getTileEntity((int)posX, (int)posY, (int)posZ));
+		}
 		this.setDead();
 	}
 
