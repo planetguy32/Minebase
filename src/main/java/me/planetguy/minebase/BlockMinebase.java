@@ -29,7 +29,7 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 		super(Material.iron);
 		this.setCreativeTab(Minebase.creativeTab);
 		LanguageRegistry.instance().addNameForObject(this, "en_US", "Minebase Block");
-		this.setHardness(9001).setResistance(9001);//Not supposed to be broken...
+		this.setHardness(9001).setResistance(9001);//Not supposed to be broken or blown up.
 	}
 
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer player, int side, float i, float d, float k){
