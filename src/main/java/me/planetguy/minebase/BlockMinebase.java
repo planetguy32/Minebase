@@ -107,7 +107,6 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 			return Blocks.diamond_block.getIcon(0, 0);
 		else
 			return Blocks.gold_block.getIcon(0, 0);
-		
 	}
 	//>>>(0.6095776839028417,-0.30000001192092896) in -z
 	
