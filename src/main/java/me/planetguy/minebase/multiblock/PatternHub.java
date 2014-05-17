@@ -15,13 +15,8 @@ public class PatternHub {
 		w.setBlock(x,y+2,z, Minebase.instance.mainBlock);
 		w.setBlockMetadataWithNotify(x, y+1, z, BlockMinebase.META_ASSEMBLER, 3);
 		
-		for(int dx=-platformSize; dx<=platformSize; dx++){
-			for(int dz=-platformSize; dz<=platformSize; dz++){
-				w.setBlock(x+dx, y, z+dz, Minebase.instance.mainBlock);
-				w.setBlockMetadataWithNotify(x+dx, y, z+dz, BlockMinebase.META_PLATFORM, 3);
-				((TileEntityMinebase)w.getTileEntity(x, y+2, z)).setOwner(parent);
-			}
-		}
+		Utils.buildPlatform(w, x, y, z, platformSize, parent);
+
 	}
 	
 
