@@ -1,6 +1,7 @@
 package me.planetguy.minebase;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 import me.planetguy.minebase.multiblock.PatternBridge;
 import me.planetguy.minebase.multiblock.PatternHub;
@@ -19,6 +20,8 @@ import net.minecraft.world.World;
 
 public class EntityProjectile extends EntityArrow {
 
+	private int lastX, lastY, lastZ;
+	
 	private int parentX,
 	parentY,
 	parentZ;
@@ -28,6 +31,8 @@ public class EntityProjectile extends EntityArrow {
 	private ProjectileType projectileType;
 
 	final Field inGround;
+	
+	ArrayList<TileEntityTrail> trails=new ArrayList<TileEntityTrail>();
 
 	public EntityProjectile(World w) {
 		super(w);
@@ -53,6 +58,9 @@ public class EntityProjectile extends EntityArrow {
 		parentX=te.xCoord;
 		parentY=te.yCoord;
 		parentZ=te.zCoord;
+		lastX=parentX;
+		lastY=parentY;
+		lastZ=parentZ;
 	}
 
 
@@ -159,7 +167,7 @@ public class EntityProjectile extends EntityArrow {
 				setDead();
 				worldObj.spawnParticle("largeexplode", posX, posY, posZ, motionX, motionY, motionZ);
 				try{
-					((ITrailDependent)worldObj.getTileEntity(parentX, parentY, parentZ)).onChildExplode((int)posX, (int)posY, (int)posZ);
+					((ITrailDependent)worldObj.getTileEntity(lastX, lastY, lastZ)).onChildExplode((int)posX, (int)posY, (int)posZ);
 				}catch(ClassCastException e){
 					e.printStackTrace();
 				}
@@ -167,14 +175,20 @@ public class EntityProjectile extends EntityArrow {
 				worldObj.setBlock((int)posX,traceResult+1,(int)posZ, Minebase.instance.mainBlock);
 				worldObj.setBlockMetadataWithNotify((int)posX,traceResult+1,(int)posZ, BlockMinebase.META_TRAIL, 3);
 				try{
-					((ITrailDependent)worldObj.getTileEntity((int)posX,traceResult+1,(int)posZ))
-					.setParent(worldObj.getTileEntity(parentX, parentY, parentZ));
+					ITrailDependent te=((ITrailDependent)worldObj.getTileEntity((int)posX,traceResult+1,(int)posZ));
+					te.setParent(worldObj.getTileEntity(lastX, lastY, lastZ));
+					
+					((TileEntityTrail)te).setAbsoluteParent(
+							worldObj.getTileEntity( parentX,
+													parentY,
+													parentZ));
+					trails.add((TileEntityTrail) te);
 				}catch(ClassCastException e){
 					e.printStackTrace();
 				}
-				parentX=(int)posX;
-				parentY=traceResult+1;
-				parentZ=(int)posZ;
+				lastX=(int)posX;
+				lastY=traceResult+1;
+				lastZ=(int)posZ;
 			}
 		}
 	}

@@ -29,6 +29,21 @@ public class TileEntityTrail extends TileEntity implements ITrailDependent {
 
 	}
 	
+	public void setAbsoluteParent(TileEntity parent){
+		sourceX=parent.xCoord;
+		sourceY=parent.yCoord;
+		sourceZ=parent.zCoord;
+		if(parent instanceof ITrailDependent){
+			((ITrailDependent)parent).onPlaceChild(xCoord, yCoord, zCoord);
+		}
+	}
+	
+	public void setAbsoluteChild(TileEntity child){
+		destX=child.xCoord;
+		destY=child.yCoord;
+		destZ=child.zCoord;
+	}
+	
 	@Override
 	public void onPlaceChild(int x, int y, int z){
 		childX=x;
