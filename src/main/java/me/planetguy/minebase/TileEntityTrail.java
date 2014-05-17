@@ -5,6 +5,10 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityTrail extends TileEntity implements ITrailDependent {
 	
+	public int sourceX, sourceY, sourceZ;
+	
+	public int destX, destY, destZ;
+	
 	public int parentX, parentY, parentZ;
 	
 	public int childX, childY, childZ;
