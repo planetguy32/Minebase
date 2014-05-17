@@ -70,7 +70,7 @@ public class EntityProjectile extends EntityArrow {
 	public void onUpdate(){
 		super.onUpdate();
 		if(worldObj.isRemote)return;
-		Trail.leaveTrace(this);
+		leaveTrace();
 		try {
 			if(inGround.getBoolean(this))
 				onImpact();
@@ -152,6 +152,32 @@ public class EntityProjectile extends EntityArrow {
 		this.projectileType = projectileType;
 	}
 
-	
+	public void leaveTrace(){
+		if(getProjectileType()!=null&&getProjectileType().isBuilding){
+			int traceResult=Trail.canPlaceBuilding(worldObj, (int)posX, (int)posY, (int)posZ);
+			if(traceResult==-1){
+				setDead();
+				worldObj.spawnParticle("largeexplode", posX, posY, posZ, motionX, motionY, motionZ);
+				try{
+					((ITrailDependent)worldObj.getTileEntity(parentX, parentY, parentZ)).onChildExplode((int)posX, (int)posY, (int)posZ);
+				}catch(ClassCastException e){
+					e.printStackTrace();
+				}
+			}else if(!(worldObj.getBlock((int)posX,traceResult+1,(int)posZ) instanceof BlockMinebase)&&!(worldObj.getBlock((int)posX,traceResult,(int)posZ) instanceof BlockMinebase)){
+				worldObj.setBlock((int)posX,traceResult+1,(int)posZ, Minebase.instance.mainBlock);
+				worldObj.setBlockMetadataWithNotify((int)posX,traceResult+1,(int)posZ, BlockMinebase.META_TRAIL, 3);
+				try{
+					((ITrailDependent)worldObj.getTileEntity((int)posX,traceResult+1,(int)posZ))
+					.setParent(worldObj.getTileEntity(parentX, parentY, parentZ));
+				}catch(ClassCastException e){
+					e.printStackTrace();
+				}
+				parentX=(int)posX;
+				parentY=traceResult+1;
+				parentZ=(int)posZ;
+			}
+		}
+	}
+
 
 }
