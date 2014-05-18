@@ -43,7 +43,7 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 	};
 
 	protected BlockMinebase() {
-		super(Material.iron);
+		super(Blocks.iron_block.getMaterial());
 		this.setCreativeTab(Minebase.creativeTab);
 		LanguageRegistry.instance().addNameForObject(this, "en_US", "Minebase Block");
 		this.setHardness(9001).setResistance(9001);//Not supposed to be broken or blown up.
