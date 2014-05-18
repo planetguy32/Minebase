@@ -90,7 +90,10 @@ public class EntityProjectile extends EntityArrow {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ShieldingRegistry.tryShootDown(worldObj, (int)posX, (int)posY, (int)posZ, network);
+		
+		if(ShieldingRegistry.tryShootDown(worldObj, (int)posX, (int)posY, (int)posZ, network)){
+			setDead();
+		}
 	}
 
 	public String getNetwork() {
