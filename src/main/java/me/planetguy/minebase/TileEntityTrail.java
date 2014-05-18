@@ -1,6 +1,10 @@
 package me.planetguy.minebase;
 
+
+import java.lang.reflect.Field;
+
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityTrail extends TileEntity implements ITrailDependent {
@@ -75,6 +79,36 @@ public class TileEntityTrail extends TileEntity implements ITrailDependent {
 		System.out.println(this + "\nExploding...\n");
 		worldObj.setBlock(xCoord, yCoord, zCoord, Blocks.air);
 		worldObj.spawnParticle("largeexplode", xCoord, yCoord, zCoord, 0,0,0);
+	}
+	
+	public void readFromNBT(NBTTagCompound tag){
+		for(Field f:TileEntityTrail.class.getDeclaredFields()){
+			try {
+				if(f.getType()==Integer.class)
+					f.set(this, tag.getInteger(f.getName()));
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void writeToNBT(NBTTagCompound tag){
+		for(Field f:TileEntityTrail.class.getDeclaredFields()){
+			try {
+				if(f.getType()==Integer.class)
+					tag.setInteger(f.getName(), f.getInt(this));
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

@@ -50,6 +50,9 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 			ItemStack item=player.getHeldItem();
 			te.setStoredProjectileType(getProjectile(item));
 			return true;
+		case META_TRAIL:
+			TileEntityTrail trail=(TileEntityTrail)w.getTileEntity(x, y, z);
+			player.moveEntity(trail.destX, trail.destY, trail.destZ);
 		}
 		return false;
 	}
