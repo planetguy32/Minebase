@@ -56,7 +56,7 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 				TileEntityTrail trail=(TileEntityTrail)tileent;
 				player.moveEntity(trail.destX, trail.destY, trail.destZ);
 			}else{
-				player.moveEntity(x, y+1, z);
+				//player.moveEntity(x, y+1, z);
 			}
 		}
 		return false;
