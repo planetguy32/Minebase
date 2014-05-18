@@ -8,6 +8,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -28,6 +29,17 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 	public static final int META_AA_FULL = 4;
 	public static final int META_AA_EMPTY=5;
 	public static final int META_SHIELD=6;
+	
+	IIcon[][] iconSideMetaMap;
+	String[][] iconNameMap=new String[][]{
+		new String[]{"blank","blank","hub","hub","hub","hub"},
+		new String[]{"basicBlock","basicBlock","inserter","inserter","inserter","inserter"},
+		new String[]{"ground","ground","crossFrame","crossFrame","crossFrame","crossFrame"},
+		new String[]{"basicBlock","basicBlock","basicBlock","basicBlock","basicBlock","basicBlock"},
+		new String[]{"antiAir","crossFrame","crossFrame","crossFrame","crossFrame","crossFrame"},
+		new String[]{"antiAirEmpty","crossFrame","crossFrame","crossFrame","crossFrame","crossFrame"},
+		new String[]{"shield","crossFrame","crossFrame","crossFrame","crossFrame","crossFrame"}
+	};
 
 	protected BlockMinebase() {
 		super(Material.iron);
@@ -134,4 +146,13 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 	//>>>(-0.3005073737585917,0.6314316392137016) in -x dir
 
 	//>>>(1.300000011920929,0.660749122683228) in +x dir
+	
+	public void registerBlockIcons(IIconRegister ir){
+		iconSideMetaMap=new IIcon[iconNameMap.length][iconNameMap[0].length];
+		for(int x=0; x<iconNameMap.length; x++){
+			for(int y=0; y<iconNameMap[0].length; y++){
+				iconSideMetaMap[x][y]=ir.registerIcon("planetguy_Minebase:"+iconNameMap[x][y]);
+			}
+		}
+	}
 }
