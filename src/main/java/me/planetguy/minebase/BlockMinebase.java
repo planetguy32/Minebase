@@ -1,6 +1,7 @@
 package me.planetguy.minebase;
 
 import java.util.List;
+import java.util.Random;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -99,6 +100,10 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 			return ProjectileType.TOWER;
 		}else if(is.getItem().equals(Item.getItemFromBlock(Blocks.wool))){
 			return ProjectileType.BRIDGE;
+		}else if(is.getItem().equals(Item.getItemFromBlock(Blocks.obsidian))){
+			return ProjectileType.ANTI_AIR;
+		}else if(is.getItem().equals(Item.getItemFromBlock(Blocks.diamond_block))){
+			return ProjectileType.SHIELD;
 		}
 		return null;
 	}
@@ -120,8 +125,9 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 			return Blocks.gold_block.getIcon(0, 0);
 	}
 	
-	public void onBlockUpdate(World w, int x, int y, int z){
-		
+	public void updateTick(World w, int x, int y, int z, Random r) {
+		if(w.getBlockMetadata(x, y, z)==META_AA_EMPTY)
+			w.setBlockMetadataWithNotify(x, y, z, META_AA_FULL, 3);
 	}
 	//>>>(0.6095776839028417,-0.30000001192092896) in -z
 

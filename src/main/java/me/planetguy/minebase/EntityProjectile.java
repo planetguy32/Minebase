@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import me.planetguy.minebase.multiblock.PatternBridge;
+import me.planetguy.minebase.multiblock.PatternDefensive;
 import me.planetguy.minebase.multiblock.PatternHub;
 import me.planetguy.minebase.multiblock.PatternTower;
 import me.planetguy.minebase.multiblock.Trail;
@@ -89,7 +90,7 @@ public class EntityProjectile extends EntityArrow {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		ShieldingRegistry.tryShootDown(worldObj, (int)posX, (int)posY, (int)posZ, network);
 	}
 
 	public String getNetwork() {
@@ -106,6 +107,7 @@ public class EntityProjectile extends EntityArrow {
 		if(getProjectileType()!=null){
 			switch(this.getProjectileType()){
 			case ANTI_AIR:
+				PatternDefensive.buildAntiAir(worldObj, (int)posX, (int)posY, (int)posZ, network);
 				break;
 			case BALLOON:
 				break;
@@ -137,6 +139,7 @@ public class EntityProjectile extends EntityArrow {
 			case REPAIR:
 				break;
 			case SHIELD:
+				PatternDefensive.buildShield(worldObj, (int)posX, (int)posY, (int)posZ, network);
 				break;
 			case SPIKE:
 				break;
