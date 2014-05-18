@@ -24,6 +24,9 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 	public static final int META_ASSEMBLER=1;
 	public static final int META_PLATFORM=2;
 	public static final int META_TRAIL=3;
+	public static final int META_AA_FULL = 4;
+	public static final int META_AA_EMPTY=5;
+	public static final int META_SHIELD=6;
 
 	protected BlockMinebase() {
 		super(Material.iron);
@@ -115,6 +118,10 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 			return Blocks.diamond_block.getIcon(0, 0);
 		else
 			return Blocks.gold_block.getIcon(0, 0);
+	}
+	
+	public void onBlockUpdate(World w, int x, int y, int z){
+		
 	}
 	//>>>(0.6095776839028417,-0.30000001192092896) in -z
 
