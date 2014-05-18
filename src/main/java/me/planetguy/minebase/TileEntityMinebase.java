@@ -4,7 +4,7 @@ import me.planetguy.minebase.util.Tree;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityMinebase extends TileEntity{
+public class TileEntityMinebase extends TileEntity implements ITrailDependent{
 
 	private Tree record;
 
