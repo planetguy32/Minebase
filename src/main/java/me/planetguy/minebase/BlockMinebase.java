@@ -127,14 +127,14 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 	}
 
 	public IIcon getIcon(int side, int meta){
-		if(meta==META_TRAIL)
-			return Blocks.lapis_block.getIcon(0, 0);
-		else if(meta==META_PLATFORM)
-			return Blocks.iron_block.getIcon(0,0);
-		else if(meta==META_LAUNCHER)
-			return Blocks.diamond_block.getIcon(0, 0);
-		else
-			return Blocks.gold_block.getIcon(0, 0);
+		try{
+			System.out.println(iconSideMetaMap[meta][side]);
+			return iconSideMetaMap[meta][side];
+		}catch(Exception e){
+			System.err.println("Couldn't get icon for meta "+meta+", side "+side);
+			e.printStackTrace();
+			return Blocks.gold_block.getIcon(side, meta);
+		}
 	}
 	
 	public void updateTick(World w, int x, int y, int z, Random r) {
