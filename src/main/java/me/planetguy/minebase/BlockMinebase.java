@@ -51,7 +51,6 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer player, int side, float i, float d, float k){
 		int myMeta=w.getBlockMetadata(x, y, z);
-		printIcons();
 		switch(myMeta){
 		case META_LAUNCHER:
 			TileEntityMinebase te=(TileEntityMinebase) w.getTileEntity(x, y, z);
@@ -151,17 +150,13 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 		for(int x=0; x<iconNameMap.length; x++){
 			IIcon[] row=new IIcon[iconNameMap[x].length];
 			for(int y=0; y<row.length; y++){
-				row[y]=ir.registerIcon("/assets/"+Minebase.modid+"/textures/blocks/"+iconNameMap[x][y]);
+				row[y]=ir.registerIcon(Minebase.modid+":"+iconNameMap[x][y]);
 			}
 			iconSideMetaMap[x]=row;
 		}
 	}
 	
-	public void printIcons(){
-		for(IIcon[] icons:iconSideMetaMap){
-			for(IIcon icon:icons){
-				System.out.print(icon.getIconName()+",");
-			}System.out.println();
-		}
+	public boolean isOpaqueCube(){
+		return false;
 	}
 }
