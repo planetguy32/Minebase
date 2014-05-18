@@ -34,7 +34,7 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer player, int side, float i, float d, float k){
 		int myMeta=w.getBlockMetadata(x, y, z);
-		
+
 		switch(myMeta){
 		case META_LAUNCHER:
 			TileEntityMinebase te=(TileEntityMinebase) w.getTileEntity(x, y, z);
@@ -51,8 +51,13 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 			te.setStoredProjectileType(getProjectile(item));
 			return true;
 		case META_TRAIL:
-			TileEntityTrail trail=(TileEntityTrail)w.getTileEntity(x, y, z);
-			player.moveEntity(trail.destX, trail.destY, trail.destZ);
+			TileEntity tileent=w.getTileEntity(x, y, z);
+			if(tileent instanceof TileEntityTrail){
+				TileEntityTrail trail=(TileEntityTrail)tileent;
+				player.moveEntity(trail.destX, trail.destY, trail.destZ);
+			}else{
+				player.moveEntity(x, y+1, z);
+			}
 		}
 		return false;
 	}
@@ -94,13 +99,13 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 		}
 		return null;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void getSubBlocks(Item p_149666_1_, CreativeTabs p_149666_2_, List items){
 		items.add(new ItemStack(this, 1, 0));
 		items.add(new ItemStack(this, 1, 1));
 	}
-	
+
 	public IIcon getIcon(int side, int meta){
 		if(meta==META_TRAIL)
 			return Blocks.lapis_block.getIcon(0, 0);
@@ -112,7 +117,7 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 			return Blocks.gold_block.getIcon(0, 0);
 	}
 	//>>>(0.6095776839028417,-0.30000001192092896) in -z
-	
+
 	//>>>(-0.3005073737585917,0.6314316392137016) in -x dir
 
 	//>>>(1.300000011920929,0.660749122683228) in +x dir
