@@ -151,7 +151,7 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 		for(int x=0; x<iconNameMap.length; x++){
 			IIcon[] row=new IIcon[iconNameMap[x].length];
 			for(int y=0; y<row.length; y++){
-				row[y]=ir.registerIcon(iconNameMap[x][y]);
+				row[y]=ir.registerIcon(Minebase.modid+":"+iconNameMap[x][y]);
 			}
 			iconSideMetaMap[x]=row;
 		}

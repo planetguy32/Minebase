@@ -20,6 +20,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 @Mod(modid = "planetguy_Minebase")
 public class Minebase {
 	
+	public static final String modid = "planetguy_Minebase";
+	
 	@Instance("planetguy_Minebase")
 	public static Minebase instance;
 	
