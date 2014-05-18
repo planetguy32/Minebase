@@ -1,6 +1,7 @@
 package me.planetguy.minebase;
 
 import me.planetguy.minebase.util.Tree;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -57,6 +58,27 @@ public class TileEntityMinebase extends TileEntity implements ITrailDependent{
 
 	public void setStoredProjectileType(ProjectileType storedProjectileType) {
 		this.storedProjectileType = storedProjectileType;
+	}
+
+	@Override
+	public void setParent(TileEntity parent) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onParentExplode() {
+		worldObj.setBlock(xCoord, yCoord, zCoord, Blocks.air);
+	}
+
+	@Override
+	public void onChildExplode(int x, int y, int z) {
+		
+	}
+
+	@Override
+	public void onPlaceChild(int x, int y, int z) {
+		
 	}
 
 }
