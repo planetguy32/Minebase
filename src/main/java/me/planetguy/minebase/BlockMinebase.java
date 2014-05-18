@@ -1,5 +1,6 @@
 package me.planetguy.minebase;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -50,7 +51,7 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer player, int side, float i, float d, float k){
 		int myMeta=w.getBlockMetadata(x, y, z);
-
+		printIcons();
 		switch(myMeta){
 		case META_LAUNCHER:
 			TileEntityMinebase te=(TileEntityMinebase) w.getTileEntity(x, y, z);
@@ -128,10 +129,8 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 
 	public IIcon getIcon(int side, int meta){
 		try{
-			System.out.println(iconSideMetaMap[meta][side]);
 			return iconSideMetaMap[meta][side];
 		}catch(Exception e){
-			System.err.println("Couldn't get icon for meta "+meta+", side "+side);
 			e.printStackTrace();
 			return Blocks.gold_block.getIcon(side, meta);
 		}
@@ -155,6 +154,14 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 				row[y]=ir.registerIcon("planetguy_Minebase:"+iconNameMap[x][y]);
 			}
 			iconSideMetaMap[x]=row;
+		}
+	}
+	
+	public void printIcons(){
+		for(IIcon[] icons:iconSideMetaMap){
+			for(IIcon icon:icons){
+				System.out.print(icon.getIconName()+",");
+			}System.out.println();
 		}
 	}
 }
