@@ -31,7 +31,7 @@ public class EntityProjectile extends EntityArrow {
 
 	private ProjectileType projectileType;
 
-	final Field inGround;
+	final Field inGround;//number 5
 	
 	ArrayList<TileEntityTrail> trails=new ArrayList<TileEntityTrail>();
 
@@ -39,7 +39,7 @@ public class EntityProjectile extends EntityArrow {
 		super(w);
 		setProjectileType(null);
 		try{
-			inGround=EntityArrow.class.getDeclaredField("inGround");
+			inGround=EntityArrow.class.getDeclaredFields()[5];
 			inGround.setAccessible(true);
 		}catch(Exception e){
 			throw new RuntimeException(e);
