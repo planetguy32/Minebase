@@ -148,11 +148,13 @@ public class BlockMinebase extends Block implements ITileEntityProvider{
 	//>>>(1.300000011920929,0.660749122683228) in +x dir
 	
 	public void registerBlockIcons(IIconRegister ir){
-		iconSideMetaMap=new IIcon[iconNameMap.length][iconNameMap[0].length];
+		iconSideMetaMap=new IIcon[iconNameMap.length][];
 		for(int x=0; x<iconNameMap.length; x++){
-			for(int y=0; y<iconNameMap[0].length; y++){
-				iconSideMetaMap[x][y]=ir.registerIcon("planetguy_Minebase:"+iconNameMap[x][y]);
+			IIcon[] row=new IIcon[iconNameMap[x].length];
+			for(int y=0; y<row.length; y++){
+				row[y]=ir.registerIcon("planetguy_Minebase:"+iconNameMap[x][y]);
 			}
+			iconSideMetaMap[x]=row;
 		}
 	}
 }
